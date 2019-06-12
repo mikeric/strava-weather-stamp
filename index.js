@@ -14,6 +14,12 @@ const DarkSky = axios.create({
   baseURL: `https://api.darksky.net/forecast/${DARKSKY_API_KEY}/`
 })
 
+// Tuple of (latitude, longitude, timestamp) representing the specific location
+// and time of the activity.
+const activityLoctime = activity => (
+  [...activity.start_latlng, Math.floor(Date.parse(activity.start_date) / 1000)]
+)
+
 // Draw ASCII arrow in the direction the wind is blowing.
 const arrow = bearing => (
   '↓↙←↖↑↗→↘↓'[Math.round(bearing / 45)]
