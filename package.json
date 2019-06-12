@@ -15,5 +15,8 @@
     "wind"
   ],
   "author": "Michael Richards",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.0"
+  }
 }
