@@ -1,0 +1,19 @@
+{
+  "name": "strava-weather-stamp",
+  "version": "1.0.0",
+  "description": "Include the atmospheric conditions, such as temperature and wind speed/direction, in your Strava activity descriptions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "keywords": [
+    "strava",
+    "cycling",
+    "running",
+    "weather",
+    "temperature",
+    "wind"
+  ],
+  "author": "Michael Richards",
+  "license": "ISC"
+}
