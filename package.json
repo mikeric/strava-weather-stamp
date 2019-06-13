@@ -4,7 +4,9 @@
   "description": "Include the atmospheric conditions, such as temperature and wind speed/direction, in your Strava activity descriptions.",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "handshake": "node handshake.js",
+    "stamp": "node index.js"
   },
   "keywords": [
     "strava",
