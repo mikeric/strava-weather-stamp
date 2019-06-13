@@ -1,11 +1,12 @@
 const axios = require('axios')
-const { DARKSKY_API_KEY, STRAVA_ACCESS_TOKEN } = require('./config.json')
+const auth = require('./auth.json')
+const { DARKSKY_API_KEY } = require('./config.json')
 
 // For interfacing with the Strava API.
 const Strava = axios.create({
   baseURL: 'https://www.strava.com/api/v3/',
   headers: {
-    'Authorization': `Bearer ${STRAVA_ACCESS_TOKEN}`
+    'Authorization': `Bearer ${auth.access_token}`
   }
 })
 
