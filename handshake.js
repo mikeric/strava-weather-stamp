@@ -2,9 +2,9 @@ const axios = require('axios')
 const open = require('open')
 const http = require('http')
 const url = require('url')
-const { STRAVA_CLIENT_ID, STRAVA_CLIENT_SECRET } = require('./config.json')
+const { STRAVA_CLIENT_ID, STRAVA_CLIENT_SECRET, HANDSHAKE_PORT } = require('./config.json')
 
-const AUTH_URL = `http://www.strava.com/oauth/authorize?client_id=${STRAVA_CLIENT_ID}&response_type=code&redirect_uri=http://localhost:9615/&approval_prompt=force&scope=read_all,activity:read_all,activity:write`
+const AUTH_URL = `http://www.strava.com/oauth/authorize?client_id=${STRAVA_CLIENT_ID}&response_type=code&redirect_uri=http://localhost:${HANDSHAKE_PORT}/&approval_prompt=force&scope=read_all,activity:read_all,activity:write`
 
 ;(() => {
   const server = http.createServer(async (req, res) => {
@@ -27,7 +27,7 @@ const AUTH_URL = `http://www.strava.com/oauth/authorize?client_id=${STRAVA_CLIEN
     }
 
     server.close()
-  }).listen(9615)
+  }).listen(HANDSHAKE_PORT)
 
   open(AUTH_URL)
 })()
