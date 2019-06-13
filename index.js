@@ -34,19 +34,38 @@ const createStamp = ({ temperature, windSpeed, windGust, windBearing }) => (
   ].join(' | ')
 )
 
-// Update the description of the athlete's latest activity with weather stamp.
-Strava.get('athlete/activities?per_page=1').then(res => {
-  res.data.forEach(activity => {
-    const start = Math.floor(Date.parse(activity.start_date) / 1000)
-    const spaceTime = [...activity.start_latlng, start]
+// Get the athlete's most recent activity.
+const getLatestActivity = () => (
+  Strava.get('athlete/activities', { params: { per_page: 1 }}).then(res => (
+    res.data[0]
+  ))
+)
 
-    DarkSky.get(`${spaceTime.join()}?units=ca`).then(res => {
-      const description = createStamp(res.data.currently)
+// Get the weather conditions at the specified loctime.
+const getConditions = loctime => (
+  DarkSky.get(loctime.join(), { params: { units: 'ca' }}).then(res => (
+    res.data.currently
+  ))
+)
 
-      Strava.put(`activities/${activity.id}`, { description }).then(() => {
-        console.log(activity.name)
-        console.log(description)
-      })
-    })
-  })
-})
+// Update the activity with a weather stamp.
+const stampActivity = async activity => {
+  const conditions = await getConditions(activityLoctime(activity))
+  const description = createStamp(conditions)
+
+  await Strava.put(`activities/${activity.id}`, { description })
+  return description
+}
+
+// Weather stamp the athlete's latest activity.
+(async () => {
+  try {
+    const activity = await getLatestActivity()
+    const stamp = await stampActivity(activity)
+
+    console.log(activity.name)
+    console.log(stamp)
+  } catch(error) {
+    console.error(error.response.data)
+  }
+})()
