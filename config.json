@@ -1,4 +1,5 @@
 {
-  "STRAVA_ACCESS_TOKEN": "",
+  "STRAVA_CLIENT_ID": "",
+  "STRAVA_CLIENT_SECRET": "",
   "DARKSKY_API_KEY": ""
 }
