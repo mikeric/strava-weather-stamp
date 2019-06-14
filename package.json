@@ -1,7 +1,7 @@
 {
   "name": "strava-weather-stamp",
   "version": "1.0.0",
-  "description": "Include the atmospheric conditions, such as temperature and wind speed/direction, in your Strava activity descriptions.",
+  "description": "Add atmospheric conditions, such as temperature and wind speed/direction, to your activities on Strava.",
   "main": "index.js",
   "scripts": {
     "test": "npm test",
