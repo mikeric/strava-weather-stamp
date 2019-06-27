@@ -26,12 +26,17 @@ const arrow = bearing => (
   '↓↙←↖↑↗→↘↓'[Math.round(bearing / 45)]
 )
 
+// Wind speed and gust (only display gust if faster than average wind speed).
+const windDetails = (speed, gust) => (
+  `${speed} km/h${gust > speed ? ` (${gust} km/h gust)` : ''}`
+)
+
 // Generate stamp from weather conditions. Example output:
 // 23.31 °C | 4.78 km/h (22.35 km/h gust) ↗
 const createStamp = ({ temperature, windSpeed, windGust, windBearing }) => (
   [
     `${temperature} °C`,
-    `${windSpeed} km/h (${windGust} km/h gust) ${arrow(windBearing)}`
+    `${windDetails(windSpeed, windGust)} ${arrow(windBearing)}`
   ].join(' | ')
 )
 
